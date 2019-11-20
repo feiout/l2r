@@ -1,9 +1,11 @@
 package com.l2r.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by Messi on 2019/11/18.
@@ -11,61 +13,52 @@ import java.util.Date;
 
 @Entity
 @Table(name="User")
-public class User {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class User implements Serializable {
     @Id
-    private String Id;
-    private String Name;
-    private String Department;
-    private String UserType;
-    private Date LastLogin;
-    private Date LastChange;
+    private long id;
+    private String name;
+    private String department;
+    private String userType;
+    private Integer subscriptionId;
 
-    public String getId() {
-        return Id;
+    public long getId() {
+        return id;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDepartment() {
-        return Department;
+        return department;
     }
 
     public void setDepartment(String department) {
-        Department = department;
+        this.department = department;
     }
 
     public String getUserType() {
-        return UserType;
+        return userType;
     }
 
     public void setUserType(String userType) {
-        UserType = userType;
+        this.userType = userType;
     }
 
-    public Date getLastLogin() {
-        return LastLogin;
+    public Integer getSubscriptionId() {
+        return subscriptionId;
     }
 
-    public void setLastLogin(Date lastLogin) {
-        LastLogin = lastLogin;
+    public void setSubscriptionId(Integer subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
-
-    public Date getLastChange() {
-        return LastChange;
-    }
-
-    public void setLastChange(Date lastChange) {
-        LastChange = lastChange;
-    }
-
 }
