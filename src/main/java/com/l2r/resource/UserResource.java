@@ -24,7 +24,7 @@ private IUser userService;
 
     @RequestMapping(method = RequestMethod.GET,value = "/list")
     public Result getUserList(HttpServletResponse response){
-        List <User> users=userService.ALL();
+        List <User> users=userService.FindAll();
         Result result=new Result(users);
         return result;
     }
@@ -35,4 +35,12 @@ private IUser userService;
         Result result=new Result(users);
         return result;
     }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/id")
+    public Result queryUserById(HttpServletResponse response){
+        User users=userService.QueryUserById(1);
+        Result result=new Result(users);
+        return result;
+    }
+
 }

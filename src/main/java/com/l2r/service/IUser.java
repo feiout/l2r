@@ -11,6 +11,7 @@ import java.util.List;
 
 
 public interface IUser extends IService<User> {
-    List<User> ALL();
+    List<User> FindAll();
     List<User> QueryALL();
+    User QueryUserById(Integer i);
 }

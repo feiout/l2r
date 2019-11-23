@@ -16,17 +16,18 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements Serializable {
     @Id
-    private long id;
+    private Integer id;
     private String name;
     private String department;
     private String userType;
     private Integer subscriptionId;
 
-    public long getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

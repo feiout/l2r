@@ -22,7 +22,7 @@ public class IUserImpl extends AbstractService<User> implements IUser {
     public JpaRepository<User,String> getRepository(){return userDao;}
 
     @Override
-    public List<User> ALL() {
+    public List<User> FindAll() {
         List<User> users=userDao.findAll();
         return users;
     }
@@ -32,4 +32,11 @@ public class IUserImpl extends AbstractService<User> implements IUser {
         List<User> users=userDao.QueryALL();
         return users;
     }
+
+    @Override
+    public User QueryUserById(Integer i) {
+        User user=userDao.findById(i);
+        return user;
+    }
+
 }
