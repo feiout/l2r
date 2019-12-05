@@ -10,19 +10,19 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="Userdepartment")
+@Table(name="userdepartment")
 public class Userdepartment {
     @Id
-    private String Id;
+    private Integer Id;
     private String Department;
-    private String SubscriptionId;
+    private Integer SubscriptionId;
 
 
-    public String getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -34,11 +34,11 @@ public class Userdepartment {
         Department = department;
     }
 
-    public String getSubscriptionId() {
+    public Integer getSubscriptionId() {
         return SubscriptionId;
     }
 
-    public void setSubscriptionId(String subscriptionId) {
+    public void setSubscriptionId(Integer subscriptionId) {
         SubscriptionId = subscriptionId;
     }
 }

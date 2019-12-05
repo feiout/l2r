@@ -2,14 +2,22 @@ package com.l2r.resource;
 
 import com.l2r.base.BaseResource;
 import com.l2r.base.Result;
+import com.l2r.utils.SecurityUtil;
+import com.l2r.utils.WithoutAuthentication;
 import com.l2r.entity.User;
+import com.l2r.entity.Userlogin;
 import com.l2r.service.IUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -19,26 +27,61 @@ import java.util.List;
 @RequestMapping("/user")
 
 public class UserResource extends BaseResource {
+private final Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 private IUser userService;
+@Autowired
+private SecurityUtil securityService;
 
-    @RequestMapping(method = RequestMethod.GET,value = "/list")
+//@Autowired
+//private IUserlogin userloginService;
+
+    @RequestMapping(method = RequestMethod.GET,value = "/id")
     public Result getUserList(HttpServletResponse response){
         List <User> users=userService.FindAll();
         Result result=new Result(users);
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/query")
-    public Result queryUserList(HttpServletResponse response){
-        List <User> users=userService.QueryALL();
-        Result result=new Result(users);
+    /**
+     * @param user
+     * @param response
+     * @return
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/authentication")
+    @WithoutAuthentication
+    public Result LoginDes(@RequestBody User user, HttpServletResponse response) throws NoSuchAlgorithmException, IOException {
+        if(logger.isDebugEnabled()){
+            logger.debug("Rest Call: /authentication ...");
+        }
+        Result result = null;
+        //数据完整性检测
+        if (user == null || StringUtils.isEmpty(user.getUserlogin().getLoginName()) || StringUtils.isEmpty(user.getUserlogin().getPassword())) {
+            return null;
+        }
+        Userlogin ul = new Userlogin(user.getUserlogin().getLoginName(),user.getUserlogin().getPassword());
+        User dbuser=userService.LoginForSingleUser(ul);
+        if (dbuser != null) {
+            String token = SecurityUtil.generateToken(user.getUserlogin().getLoginName());
+            Cookie cookie = new Cookie(SecurityUtil.TOKEN, token);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            result = new Result(dbuser,true);
+            result.setToken(token);
+            securityService.SaveLoginedUser(token,dbuser);
+//            SecurityUtil.putLoginEmployee(token, dbuser);
+        }
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/id")
-    public Result queryUserById(HttpServletResponse response){
+
+    @RequestMapping(method = RequestMethod.GET,value = "/list")
+    public Result queryUserById(HttpServletResponse response,
+                                @CookieValue(value = SecurityUtil.TOKEN, defaultValue = "") String token){
         User users=userService.QueryUserById(1);
+        users.setStatus(token);
         Result result=new Result(users);
         return result;
     }

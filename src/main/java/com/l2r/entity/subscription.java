@@ -10,43 +10,43 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="Usersubscription")
-public class Usersubscription {
+@Table(name="subscription")
+public class Subscription {
     @Id
-    private String Id;
-    private String CompanyName;
-    private Integer Amount;
-    private Date ExpireDate;
+    private String id;
+    private String companyName;
+    private Integer amount;
+    private Date expireDate;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getCompanyName() {
-        return CompanyName;
+        return companyName;
     }
 
     public void setCompanyName(String companyName) {
-        CompanyName = companyName;
+        this.companyName = companyName;
     }
 
     public Integer getAmount() {
-        return Amount;
+        return amount;
     }
 
     public void setAmount(Integer amount) {
-        Amount = amount;
+        this.amount = amount;
     }
 
     public Date getExpireDate() {
-        return ExpireDate;
+        return expireDate;
     }
 
     public void setExpireDate(Date expireDate) {
-        ExpireDate = expireDate;
+        this.expireDate = expireDate;
     }
 }

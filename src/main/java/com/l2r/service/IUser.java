@@ -2,6 +2,7 @@ package com.l2r.service;
 
 import com.l2r.base.IService;
 import com.l2r.entity.User;
+import com.l2r.entity.Userlogin;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface IUser extends IService<User> {
     List<User> FindAll();
     List<User> QueryALL();
     User QueryUserById(Integer i);
+    User LoginForSingleUser(Userlogin ul);
 }

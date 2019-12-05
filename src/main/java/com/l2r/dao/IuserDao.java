@@ -15,4 +15,6 @@ import java.util.List;
 public interface IUserDao extends JpaRepository<User,String> {
     @Query(value="Select * FROM User", nativeQuery=true)
     List<User> QueryALL();
+
+    User findById(Integer i);
 }

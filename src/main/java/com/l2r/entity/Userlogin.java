@@ -3,6 +3,7 @@ package com.l2r.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -10,43 +11,52 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="Userlogin")
+@Table(name="userlogin")
 public class Userlogin {
     @Id
-    private String UserId;
-    private String LoginName;
-    private String Password;
-    private String SubscriptionId;
+    private Integer id;
+    private Integer userId;
+    private String loginName;
+    private String password;
 
-    public String getUserId() {
-        return UserId;
+    public Userlogin(String loginName, String password) {
+        this.loginName = loginName;
+        this.password = password;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public Userlogin() {
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getLoginName() {
-        return LoginName;
+        return loginName;
     }
 
     public void setLoginName(String loginName) {
-        LoginName = loginName;
+        this.loginName = loginName;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
-    }
-
-    public String getSubscriptionId() {
-        return SubscriptionId;
-    }
-
-    public void setSubscriptionId(String subscriptionId) {
-        SubscriptionId = subscriptionId;
+        this.password = password;
     }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -12,8 +13,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name="User")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Table(name="user")
 public class User implements Serializable {
     @Id
     private Integer id;
@@ -21,6 +21,10 @@ public class User implements Serializable {
     private String department;
     private String userType;
     private Integer subscriptionId;
+    @Transient
+    private Userlogin userlogin;
+    @Transient
+    private String status;
 
 
     public Integer getId() {
@@ -61,5 +65,21 @@ public class User implements Serializable {
 
     public void setSubscriptionId(Integer subscriptionId) {
         this.subscriptionId = subscriptionId;
+    }
+
+    public Userlogin getUserlogin() {
+        return userlogin;
+    }
+
+    public void setUserlogin(Userlogin userlogin) {
+        this.userlogin = userlogin;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

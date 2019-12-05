@@ -2,8 +2,11 @@ package com.l2r.service.Impl;
 
 import com.l2r.base.AbstractService;
 import com.l2r.dao.IUserDao;
+import com.l2r.dao.IUserloginDao;
 import com.l2r.entity.User;
+import com.l2r.entity.Userlogin;
 import com.l2r.service.IUser;
+import com.l2r.service.IUserlogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ import java.util.List;
 public class IUserImpl extends AbstractService<User> implements IUser {
     @Autowired
     private IUserDao userDao;
+    @Autowired
+    private IUserloginDao userloginDao;
 
     public JpaRepository<User,String> getRepository(){return userDao;}
 
@@ -36,6 +41,16 @@ public class IUserImpl extends AbstractService<User> implements IUser {
     @Override
     public User QueryUserById(Integer i) {
         User user=userDao.findById(i);
+        return user;
+    }
+
+    @Override
+    public User LoginForSingleUser(Userlogin ul) {
+        Userlogin dbul=userloginDao.findbyUsernamePassword(ul.getPassword(),ul.getLoginName());
+        User user=new User();
+        if(null != dbul){
+            user=userDao.findById(dbul.getUserId());
+        }
         return user;
     }
 
