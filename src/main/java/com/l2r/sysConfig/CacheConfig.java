@@ -19,16 +19,16 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 
 /**
- * Created by messi on 2019-12-05.
+ * Created by messi on 2019-12-05. 缓存的bean名称为"Dict"
  */
 @Configuration
 @EnableCaching(proxyTargetClass = true)
 public class CacheConfig implements CachingConfigurer{
 
-        @Bean(name = "User")
+        @Bean(name = "Dict")
         public EhCacheFactoryBean elbCaching() {
             EhCacheFactoryBean ehCacheManagerFactoryBean = new EhCacheFactoryBean();
-            ehCacheManagerFactoryBean.setCacheName("User");
+            ehCacheManagerFactoryBean.setCacheName("Dict");
             ehCacheManagerFactoryBean.setCacheManager(ehCacheManager());
             return ehCacheManagerFactoryBean;
         }

@@ -19,7 +19,7 @@
         memoryStoreEvictionPolicy="LRU"
     />
 
-    <cache name="User"
+    <cache name="Dict"
            maxElementsInMemory="500"
            eternal="true"
            overflowToDisk="false"

@@ -19,6 +19,12 @@ public abstract class AbstractService<T> implements IService<T>  {
         getRepository().deleteById(id);
     }
 
+//    @Override
+//    @org.springframework.transaction.annotation.Transactional
+//    public void delete(String id) {
+//        getRepository().delete(id);
+//    }
+
     @Override
     @Transactional
     public T update(T t) {
@@ -34,6 +40,11 @@ public abstract class AbstractService<T> implements IService<T>  {
     public T get(String id) {
         return getRepository().findById(id).get();
     }
+
+//    @Override
+//    public T get(String id) {
+//        return getRepository().findOne(id);
+//    }
 
     @Override
     public List<T> getAll() {

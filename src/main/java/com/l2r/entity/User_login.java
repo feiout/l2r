@@ -1,9 +1,6 @@
 package com.l2r.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,20 +8,21 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="userlogin")
-public class Userlogin {
+@Table(name="user_login")
+public class User_login {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
+    private String userId;
     private String loginName;
     private String password;
 
-    public Userlogin(String loginName, String password) {
+    public User_login(String loginName, String password) {
         this.loginName = loginName;
         this.password = password;
     }
 
-    public Userlogin() {
+    public User_login() {
     }
 
 
@@ -36,11 +34,11 @@ public class Userlogin {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -4,7 +4,7 @@ import com.l2r.base.AbstractService;
 import com.l2r.dao.IUserDao;
 import com.l2r.dao.IUserloginDao;
 import com.l2r.entity.User;
-import com.l2r.entity.Userlogin;
+import com.l2r.entity.User_login;
 import com.l2r.service.IUser;
 import com.l2r.service.IUserlogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +45,11 @@ public class IUserImpl extends AbstractService<User> implements IUser {
     }
 
     @Override
-    public User LoginForSingleUser(Userlogin ul) {
-        Userlogin dbul=userloginDao.findbyUsernamePassword(ul.getPassword(),ul.getLoginName());
+    public User LoginForSingleUser(User_login ul) {
+        User_login dbul=userloginDao.findbyUsernamePassword(ul.getPassword(),ul.getLoginName());
         User user=new User();
         if(null != dbul){
-            user=userDao.findById(dbul.getUserId());
+            user=userDao.findById(dbul.getId());
         }
         return user;
     }

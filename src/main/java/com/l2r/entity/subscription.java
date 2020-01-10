@@ -1,8 +1,6 @@
 package com.l2r.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,17 +11,27 @@ import java.util.Date;
 @Table(name="subscription")
 public class Subscription {
     @Id
-    private String id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+    private String subscriptionId;
     private String companyName;
-    private Integer amount;
+    private Integer amount;  //default is 0;
     private Date expireDate;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public void setSubscriptionId(String subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
     public String getCompanyName() {

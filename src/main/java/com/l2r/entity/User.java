@@ -2,11 +2,9 @@ package com.l2r.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Messi on 2019/11/18.
@@ -16,13 +14,16 @@ import java.io.Serializable;
 @Table(name="user")
 public class User implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+    private String userId;
     private String name;
     private String department;
-    private String userType;
-    private Integer subscriptionId;
+    private String userType;  //Super = 系统管理员(可创建Admin+Subscription), Admin= 企业管理员(可创建企业的Staff), Insale=企业内部销售, Outsale=企业外部销售 ，Agency=代理商 ， Intech=内部技术支持
+    private Date createDate;
+    private String subscriptionId;
     @Transient
-    private Userlogin userlogin;
+    private User_login userlogin;
     @Transient
     private String status;
 
@@ -33,6 +34,14 @@ public class User implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -59,19 +68,27 @@ public class User implements Serializable {
         this.userType = userType;
     }
 
-    public Integer getSubscriptionId() {
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getSubscriptionId() {
         return subscriptionId;
     }
 
-    public void setSubscriptionId(Integer subscriptionId) {
+    public void setSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 
-    public Userlogin getUserlogin() {
+    public User_login getUserlogin() {
         return userlogin;
     }
 
-    public void setUserlogin(Userlogin userlogin) {
+    public void setUserlogin(User_login userlogin) {
         this.userlogin = userlogin;
     }
 
