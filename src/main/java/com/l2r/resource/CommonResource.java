@@ -45,9 +45,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/industrylist ...");
         }
+        long t1 = new Date().getTime();
         List<Industry> industries=cacheUtil.getIndustries();
         Result result=new Result(industries,false);
-        System.out.println("GET Rest Call: /common/industrylist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/industrylist ..."+(t2-t1));
         return result;
     }
 
@@ -56,9 +58,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/provincelist ...");
         }
+        long t1 = new Date().getTime();
         List<Province> provinces=cacheUtil.getProvinces();
         Result result=new Result(provinces,false);
-        System.out.println("GET Rest Call: /common/provincelist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/provincelist ..."+(t2-t1));
         return result;
     }
 
@@ -67,6 +71,7 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/citylist/{provinceCode} ...");
         }
+        long t1 = new Date().getTime();
         List<City> cities=cacheUtil.getCities();
         List<City> filterCitis=new ArrayList<>();
         for(City c:cities){
@@ -76,7 +81,8 @@ public class CommonResource extends BaseResource {
             }
         }
         Result result=new Result(filterCitis);
-        System.out.println("GET Rest Call: /common/citylist/{provinceCode} ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/citylist/{provinceCode} ..."+(t2-t1));
         return result;
     }
 
@@ -85,6 +91,7 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/citylistbyprovincename/{provinceName}/{city} ...");
         }
+        long t1 = new Date().getTime();
         List<City> cities=cacheUtil.getCities();
         List<City> filterCitis=new ArrayList<>();
         for(City c:cities){
@@ -94,7 +101,8 @@ public class CommonResource extends BaseResource {
             }
         }
         Result result=new Result(filterCitis);
-        System.out.println("GET Rest Call: /common/citylistbyprovincename/{provinceName}/{city} ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/citylistbyprovincename/{provinceName}/{city} ..."+(t2-t1));
         return result;
     }
 
@@ -104,9 +112,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/allcitylist ...");
         }
+        long t1 = new Date().getTime();
         List<City> cities=cacheUtil.getCities();
         Result result=new Result(cities ,true);
-        System.out.println("GET Rest Call: /common/allcitylist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/allcitylist ..."+(t2-t1));
         return result;
     }
 
@@ -115,9 +125,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/userlist ...");
         }
+        long t1 = new Date().getTime();
         List<User> users=cacheUtil.getUsers();
         Result result=new Result(users);
-        System.out.println("GET Rest Call: /common/userlist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/userlist ..."+(t2-t1));
         return result;
     }
 
@@ -126,9 +138,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/companylist ...");
         }
+        long t1 = new Date().getTime();
         List<CompanyVo> companies=cacheUtil.getCompanys();
         Result result=new Result(companies);
-        System.out.println("GET Rest Call: /common/companylist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/companylist ..."+(t2-t1));
         return result;
     }
 
@@ -137,9 +151,11 @@ public class CommonResource extends BaseResource {
         if (logger.isDebugEnabled()) {
             logger.debug("Rest Call: /common/saleprojectlist ...");
         }
+        long t1 = new Date().getTime();
         List<SaleProject> saleProjects=cacheUtil.getSaleProjects();
         Result result=new Result(saleProjects);
-        System.out.println("GET Rest Call: /common/saleprojectlist ...");
+        long t2 = new Date().getTime();
+        System.out.println("GET Rest Call: /common/saleprojectlist ..."+(t2-t1));
         return result;
     }
 

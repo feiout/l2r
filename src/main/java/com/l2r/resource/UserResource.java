@@ -52,6 +52,7 @@ public Result LoginDes(@RequestBody User user, HttpServletResponse response) thr
     if(logger.isDebugEnabled()){
         logger.debug("Rest Call: /user/authentication ...");
     }
+    long t1 = new Date().getTime();
     Result result = null;
     //数据完整性检测
     if (user == null || StringUtils.isEmpty(user.getUserlogin().getLoginName()) || StringUtils.isEmpty(user.getUserlogin().getPassword())) {
@@ -70,7 +71,8 @@ public Result LoginDes(@RequestBody User user, HttpServletResponse response) thr
         User_logs ulog=new User_logs(ul.getLoginName(),new Date());
         userLogsDao.save(ulog);
     }
-    System.out.println("GET Rest Call: /user/authentication ...");
+    long t2 = new Date().getTime();
+    System.out.println("GET Rest Call: /user/authentication ..."+(t2-t1));
     return result;
 }
 
@@ -80,9 +82,11 @@ public Result getUserList(HttpServletResponse response,@CookieValue(value = Secu
     if(logger.isDebugEnabled()){
         logger.debug("Rest Call: /user/list ...");
     }
+    long t1 = new Date().getTime();
     List <User> users=userService.QueryALL();
     Result result=new Result(users);
-    System.out.println("GET Rest Call: /user/list ...");
+    long t2 = new Date().getTime();
+    System.out.println("GET Rest Call: /user/list ..."+(t2-t1));
     return result;
 }
 
@@ -92,10 +96,12 @@ public Result queryUserById(HttpServletResponse response, @PathVariable("userId"
     if(logger.isDebugEnabled()){
         logger.debug("Rest Call: /user/id/{userId} ...");
     }
+    long t1 = new Date().getTime();
     User users=userService.QueryUserById(userId);
     users.setStatus(token);
     Result result=new Result(users);
-    System.out.println("GET Rest Call: /user/id/{userId} ...");
+    long t2 = new Date().getTime();
+    System.out.println("GET Rest Call: /user/id/{userId} ..."+(t2-t1));
     return result;
 }
 
